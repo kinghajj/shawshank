@@ -24,7 +24,7 @@ fn main() {
 
     // even Box<T>
     let mut p = shawshank::builder::<Box<u8>>().hash().unwrap();
-    assert_eq!(p.intern(555), Ok(0));
+    assert_eq!(p.intern(255), Ok(0));
 
     // BTreeMap instead of default HashMap
     let mut bsp = shawshank::builder::<String>().btree().unwrap();
@@ -34,4 +34,4 @@ fn main() {
 
 For more details, see the [docs].
 
-[docs]: (https://kinghajj.github.io/shawshank/shawshank/index.html)
+[docs]: https://kinghajj.github.io/shawshank/shawshank/index.html
