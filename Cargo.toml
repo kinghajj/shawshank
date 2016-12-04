@@ -1,0 +1,25 @@
+[package]
+name = "shawshank"
+description = "An efficient, generic internment structure."
+version = "0.1.0"
+authors = ["Samuel Fredrickson <kinghajj@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+documentation = "https://kinghajj.github.io/shawshank/shawshank/index.html"
+repository = "https://github.com/kinghajj/shawshank"
+keywords = ["string", "intern", "interning"]
+build = "build.rs"
+
+[features]
+unstable = []
+
+[dependencies]
+num = "0.1"
+owning_ref = "0.2"
+
+[dev-dependencies]
+rand = "0.3"
+skeptic = "0.5"
+
+[build-dependencies]
+skeptic = "0.5"
