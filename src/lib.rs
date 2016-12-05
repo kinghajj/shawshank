@@ -1,6 +1,6 @@
-//! [`Prison`] is an efficient, generic internment structure.
+//! [`ArenaSet`] is an efficient, generic internment structure.
 //!
-//! [`Prison`]: struct.Prison.html
+//! [`ArenaSet`]: struct.ArenaSet.html
 
 #![cfg_attr(feature = "unstable", feature(test))]
 
@@ -13,8 +13,8 @@ extern crate rand;
 #[cfg(all(feature = "unstable", test))]
 extern crate test;
 
+mod arena_set;
 mod builder;
-mod prison;
 mod traits;
 mod utility;
 #[macro_use] mod macros;
@@ -23,6 +23,6 @@ mod utility;
 mod benches;
 
 pub use builder::{Builder, builder};
-pub use prison::{Error, Prison, Solitary};
+pub use arena_set::{Error, ArenaSet, StatiumSet};
 pub use traits::Map;
-pub use utility::{string_prison, byte_prison, string_solitary, byte_solitary};
+pub use utility::{string_arena_set, byte_arena_set, string_stadium_set, byte_stadium_set};

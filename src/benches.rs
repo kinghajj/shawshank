@@ -4,10 +4,10 @@ use super::*;
 use test::Bencher;
 use traits::Map;
 
-fn prefilled<M: Map<Key = &'static str, Value = u32>, F, P>(count: u32, f: F) -> (Prison<String, u32, M>, Vec<P>)
+fn prefilled<M: Map<Key = &'static str, Value = u32>, F, P>(count: u32, f: F) -> (ArenaSet<String, u32, M>, Vec<P>)
     where F: Fn(String, u32) -> P {
     let mut rng = thread_rng();
-    let mut p = Prison::new().unwrap();
+    let mut p = ArenaSet::new().unwrap();
     let mut path = Vec::new();
     for i in 0..count {
         let s = format!("{}{}", rng.next_u64(), i);

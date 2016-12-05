@@ -12,14 +12,14 @@ extern crate shawshank;
 
 fn main() {
     // prototypical motivation: string internment
-    let mut sp = shawshank::string_prison();
+    let mut sp = shawshank::string_arena_set();
     assert_eq!(sp.intern("hello"), Ok(0));
     assert_eq!(sp.intern("world"), Ok(1));
     assert_eq!(sp.intern("hello"), Ok(0));
     assert_eq!(sp.resolve(1), Ok("world"));
 
     // byte vectors work, too
-    let mut bp = shawshank::byte_prison();
+    let mut bp = shawshank::byte_arena_set();
     assert_eq!(bp.intern(&[0, 1, 2][..]), Ok(0));
 
     // even Box<T>
