@@ -1,21 +1,21 @@
 use std::collections::{BTreeMap, HashMap};
 use std::hash::Hash;
 
-/// The interface for the key-value map internal to a [`Prison`].
+/// The interface for the key-value map internal to a [`ArenaSet`].
 ///
 /// The Entry API is not supported, because it can't be used as is, anyway:
 /// the reference passed as a key to `entry(K)` would be to something outside
-/// the prison, which we absolutely don't want to store in the map. The Entry
+/// the arena_set, which we absolutely don't want to store in the map. The Entry
 /// API would have to be extended to allow changing the key before insertion.
 ///
-/// [`Prison`]: struct.Prison.html
+/// [`ArenaSet`]: struct.ArenaSet.html
 pub trait Map {
     type Key;
     type Value;
 
     /// Create an empty map.
     ///
-    /// This is required for `Prison` to function properly.
+    /// This is required for `ArenaSet` to function properly.
     fn new() -> Self;
 
     /// Create an empty map with a capacity hint.
@@ -30,17 +30,17 @@ pub trait Map {
     /// Insert a key-value pair. If there was already an entry for the key,
     /// it gets replaced, and the previous returned.
     ///
-    /// This is required for `Prison` to function properly.
+    /// This is required for `ArenaSet` to function properly.
     fn insert(&mut self, Self::Key, Self::Value) -> Option<Self::Value>;
 
     /// Get a value by its key.
     ///
-    /// This is required for `Prison` to function properly.
+    /// This is required for `ArenaSet` to function properly.
     fn get(&self, Self::Key) -> Option<&Self::Value>;
 
     /// Remove a pair by its key.
     ///
-    /// This is required for `Prison` to function properly.
+    /// This is required for `ArenaSet` to function properly.
     fn remove(&mut self, Self::Key) -> Option<Self::Value>;
 
     /// Reduce memory usage as much as possible.

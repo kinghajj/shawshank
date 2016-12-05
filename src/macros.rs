@@ -1,8 +1,8 @@
 /// Facilitates defining tuple structs that may be used as custom IDs.
 ///
-/// See the [section from `Prison`][ex] for an example.
+/// See the [section from `ArenaSet`][ex] for an example.
 ///
-/// [ex]: struct.Prison.html#custom-id-types
+/// [ex]: struct.ArenaSet.html#custom-id-types
 #[macro_export]
 macro_rules! custom_intern_id {
     ( $name:ident, $base:ty, $min:expr, $max:expr ) => {
