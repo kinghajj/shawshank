@@ -23,6 +23,6 @@ mod utility;
 mod benches;
 
 pub use builder::{Builder, builder};
-pub use arena_set::{Error, ArenaSet, StatiumSet};
+pub use arena_set::{Error, ArenaSet, StadiumSet};
 pub use traits::Map;
 pub use utility::{string_arena_set, byte_arena_set, string_stadium_set, byte_stadium_set};

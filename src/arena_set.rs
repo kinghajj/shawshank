@@ -192,7 +192,7 @@ where O: StableAddress,
 }
 
 // couldn't figure out how to get traits to abstract the differences
-// between ArenaSet and StatiumSet, so had to resort to macros
+// between ArenaSet and StadiumSet, so had to resort to macros
 
 macro_rules! insert {
     ( $this:ident, $item:ident, $to_owned:expr ) => { {
@@ -380,10 +380,10 @@ where O: StableAddress,
 /// [`intern`] can similarly accept `&'a [u8]` instead of `&'a Vec<u8>`.
 ///
 /// [`ArenaSet`]: struct.ArenaSet.html
-/// [`intern`]: struct.StatiumSet.html#method.intern
-pub struct StatiumSet<O: StableAddress<Target = R>, R: ? Sized + StableAddress = < O as Deref >::Target, I = usize, M = HashMap<&'static < R as Deref >::Target, I>>(pub ArenaSet<O, I, M>);
+/// [`intern`]: struct.StadiumSet.html#method.intern
+pub struct StadiumSet<O: StableAddress<Target = R>, R: ? Sized + StableAddress = < O as Deref >::Target, I = usize, M = HashMap<&'static < R as Deref >::Target, I>>(pub ArenaSet<O, I, M>);
 
-impl<O, R, I, M> StatiumSet<O, R, I, M>
+impl<O, R, I, M> StadiumSet<O, R, I, M>
 where O: StableAddress<Target = R>,
       R: 'static + StableAddress,
       I: Copy + ToPrimitive + FromPrimitive + Bounded,
@@ -457,7 +457,7 @@ where O: StableAddress<Target = R>,
     }
 }
 
-/// Errors that may occur when using a [`ArenaSet`].
+/// Errors that may occur when using an [`ArenaSet`].
 /// [`ArenaSet`]: struct.ArenaSet.html
 #[derive(Eq, PartialEq, Clone, Copy, Debug)]
 pub enum Error {
@@ -477,7 +477,7 @@ pub enum Error {
 
     /// The ID type cannot uniquely represent any more items.
     ///
-    /// For instance, if `I = u8`, and there are 256 items in a [`ArenaSet`],
+    /// For instance, if `I = u8`, and there are 256 items in an [`ArenaSet`],
     /// further calls to [`intern`] will fail with this error.
     ///
     /// [`ArenaSet`]: struct.ArenaSet.html

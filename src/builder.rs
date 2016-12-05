@@ -6,7 +6,7 @@ use std::ops::Deref;
 use num::{Bounded, ToPrimitive, FromPrimitive};
 use owning_ref::StableAddress;
 
-use arena_set::{Error, ArenaSet, StatiumSet};
+use arena_set::{Error, ArenaSet, StadiumSet};
 
 /// Flexible builder for [`ArenaSet`].
 ///
@@ -71,17 +71,17 @@ where O: StableAddress,
       < O::Target as Deref >::Target: 'static,
       I: Bounded + ToPrimitive + FromPrimitive
 {
-    /// Create an empty [`StatiumSet`] that uses a `HashMap`.
-    /// [`StatiumSet`]: struct.StatiumSet.html
-    pub fn stadium_set_hash(&self) -> Result<StatiumSet<O, O::Target, I, HashMap<&'static < O::Target as Deref >::Target, I>>, Error>
+    /// Create an empty [`StadiumSet`] that uses a `HashMap`.
+    /// [`StadiumSet`]: struct.StadiumSet.html
+    pub fn stadium_set_hash(&self) -> Result<StadiumSet<O, O::Target, I, HashMap<&'static < O::Target as Deref >::Target, I>>, Error>
         where < O::Target as Deref >::Target: Eq + Hash {
-        ArenaSet::new().map(|p| StatiumSet(p))
+        ArenaSet::new().map(|p| StadiumSet(p))
     }
 
-    /// Create an empty [`StatiumSet`] that uses a `BTreeMap`.
-    /// [`StatiumSet`]: struct.StatiumSet.html
-    pub fn stadium_set_btree(&self) -> Result<StatiumSet<O, O::Target, I, BTreeMap<&'static < O::Target as Deref >::Target, I>>, Error>
+    /// Create an empty [`StadiumSet`] that uses a `BTreeMap`.
+    /// [`StadiumSet`]: struct.StadiumSet.html
+    pub fn stadium_set_btree(&self) -> Result<StadiumSet<O, O::Target, I, BTreeMap<&'static < O::Target as Deref >::Target, I>>, Error>
         where < O::Target as Deref >::Target: Eq + Ord {
-        ArenaSet::new().map(|p| StatiumSet(p))
+        ArenaSet::new().map(|p| StadiumSet(p))
     }
 }

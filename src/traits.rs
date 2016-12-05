@@ -1,7 +1,7 @@
 use std::collections::{BTreeMap, HashMap};
 use std::hash::Hash;
 
-/// The interface for the key-value map internal to a [`ArenaSet`].
+/// The interface for the key-value map internal to an [`ArenaSet`].
 ///
 /// The Entry API is not supported, because it can't be used as is, anyway:
 /// the reference passed as a key to `entry(K)` would be to something outside
