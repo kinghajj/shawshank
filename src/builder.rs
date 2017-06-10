@@ -3,7 +3,7 @@ use std::hash::Hash;
 use std::marker::PhantomData;
 use std::ops::Deref;
 
-use num::{Bounded, ToPrimitive, FromPrimitive};
+use num_traits::{Bounded, ToPrimitive, FromPrimitive};
 use owning_ref::StableAddress;
 
 use arena_set::{Error, ArenaSet, StadiumSet};
