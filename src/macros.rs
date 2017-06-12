@@ -9,7 +9,7 @@ macro_rules! custom_intern_id {
         #[derive(Clone, Copy, Eq, PartialEq, Debug)]
         struct $name($base);
 
-        impl ::num::Bounded for $name {
+        impl ::num_traits::Bounded for $name {
             fn min_value() -> Self {
                 $name($min)
             }
@@ -18,14 +18,14 @@ macro_rules! custom_intern_id {
             }
         }
 
-        impl ::num::ToPrimitive for $name {
+        impl ::num_traits::ToPrimitive for $name {
             fn to_i64(&self) -> Option<i64> { self.0.to_i64() }
             fn to_u64(&self) -> Option<u64> { self.0.to_u64() }
         }
 
-        impl ::num::FromPrimitive for $name {
-            fn from_i64(n: i64) -> Option<Self> { <$base as ::num::FromPrimitive>::from_i64(n).map(|x| $name(x)) }
-            fn from_u64(n: u64) -> Option<Self> { <$base as ::num::FromPrimitive>::from_u64(n).map(|x| $name(x)) }
+        impl ::num_traits::FromPrimitive for $name {
+            fn from_i64(n: i64) -> Option<Self> { <$base as ::num_traits::FromPrimitive>::from_i64(n).map(|x| $name(x)) }
+            fn from_u64(n: u64) -> Option<Self> { <$base as ::num_traits::FromPrimitive>::from_u64(n).map(|x| $name(x)) }
         }
     };
     ( $name:ident, $base:ty ) => {

@@ -14,7 +14,7 @@ build = "build.rs"
 unstable = []
 
 [dependencies]
-num = "0.1"
+num-traits = "0.1"
 owning_ref = "0.2"
 
 [dev-dependencies]

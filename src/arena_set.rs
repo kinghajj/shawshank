@@ -4,7 +4,7 @@ use std::mem;
 use std::marker::PhantomData;
 use std::ops::Deref;
 
-use num::{Bounded, ToPrimitive, FromPrimitive};
+use num_traits::{Bounded, ToPrimitive, FromPrimitive};
 use owning_ref::StableAddress;
 
 use traits::Map;
@@ -59,15 +59,15 @@ use traits::Map;
 /// internal map, and converting to and from `usize` as needed. [`intern`]
 /// returns [`Error::IdOverflow`] if there are no more unique IDs available.
 ///
-/// The `ToPrimitive`/`FromPrimitive` traits of the `num` crate are used to
-/// perform the conversions. If these ever return `None` during an operation,
+/// The `ToPrimitive`/`FromPrimitive` traits of the `num-traits` crate are used
+/// to perform the conversions. If these ever return `None` during an operation,
 /// it will fail with [`Error::FromIdFailed`]/[`Error::ToIdFailed`].
 ///
 /// The [`custom_intern_id!`] macro reduces the boilerplate to set thes up.
 ///
 /// ```
 /// #[macro_use] extern crate shawshank;
-/// extern crate num;
+/// extern crate num_traits;
 ///
 /// use shawshank::Error;
 ///
