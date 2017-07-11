@@ -15,11 +15,11 @@ unstable = []
 
 [dependencies]
 num-traits = "0.1"
-owning_ref = "0.2"
+stable_deref_trait = "1.0"
 
 [dev-dependencies]
 rand = "0.3"
-skeptic = "0.5"
+skeptic = "0.10"
 
 [build-dependencies]
-skeptic = "0.5"
+skeptic = "0.10"

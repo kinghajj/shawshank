@@ -5,7 +5,7 @@ use std::marker::PhantomData;
 use std::ops::Deref;
 
 use num_traits::{Bounded, ToPrimitive, FromPrimitive};
-use owning_ref::StableAddress;
+use stable_deref_trait::StableDeref;
 
 use traits::Map;
 
@@ -39,8 +39,8 @@ use traits::Map;
 ///
 /// This structure generalizes to all pairs of "owned" and "reference" types
 /// where moving the "owned" doesn't invalidate the "reference." The
-/// `owning_ref` crate provides the trait `StableAddress` to mark such types.
-/// Other examples are `Vec<T>`/`[T]` and `Box<T>`/`T`, where `T: Clone`.
+/// `stable_deref_trait` crate provides the trait `StableDeref` to mark such
+/// types. Other examples are `Vec<T>`/`[T]` and `Box<T>`/`T`, where `T: Clone`.
 ///
 /// `head` contains the index of the first vacant slot, which in turn has the
 /// index of the next, etc., effectively forming a linked list, with `!0` as the
@@ -99,7 +99,7 @@ use traits::Map;
 /// [`Map`]: trait.Map.html
 /// [`custom_intern_id!`]: macro.custom_intern_id.html
 /// [`vec_arena`]: https://github.com/stjepang/vec-arena
-pub struct ArenaSet<O: StableAddress, I = usize, M = HashMap<&'static < O as Deref >::Target, I>> {
+pub struct ArenaSet<O: StableDeref, I = usize, M = HashMap<&'static < O as Deref >::Target, I>> {
     map: M,
     interned: Vec<Slot<O>>,
     head: usize,
@@ -108,7 +108,7 @@ pub struct ArenaSet<O: StableAddress, I = usize, M = HashMap<&'static < O as Der
 }
 
 impl<O, I, M> ArenaSet<O, I, M>
-where O: StableAddress,
+where O: StableDeref,
       I: Bounded + ToPrimitive + FromPrimitive,
       M: Map {
     /// Create a new, empty ArenaSet.
@@ -290,7 +290,7 @@ macro_rules! shrink {
 }
 
 impl<O, I, M> ArenaSet<O, I, M>
-where O: StableAddress,
+where O: StableDeref,
       O::Target: 'static,
       I: Copy + ToPrimitive + FromPrimitive + Bounded,
       M: Map<Key = &'static O::Target, Value = I>
@@ -372,7 +372,7 @@ where O: StableAddress,
     }
 }
 
-/// Specialization of [`ArenaSet`] where `O::Target: StableAddress`.
+/// Specialization of [`ArenaSet`] where `O::Target: StableDeref`.
 ///
 /// Example: if `O = Arc<Vec<u8>>`, then `O::Target = Vec<u8>`. Therefore,
 /// the map `M` can be `HashMap<&'static u8, usize>`, rather than the
@@ -381,11 +381,11 @@ where O: StableAddress,
 ///
 /// [`ArenaSet`]: struct.ArenaSet.html
 /// [`intern`]: struct.StadiumSet.html#method.intern
-pub struct StadiumSet<O: StableAddress<Target = R>, R: ? Sized + StableAddress = < O as Deref >::Target, I = usize, M = HashMap<&'static < R as Deref >::Target, I>>(pub ArenaSet<O, I, M>);
+pub struct StadiumSet<O: StableDeref<Target = R>, R: ? Sized + StableDeref = < O as Deref >::Target, I = usize, M = HashMap<&'static < R as Deref >::Target, I>>(pub ArenaSet<O, I, M>);
 
 impl<O, R, I, M> StadiumSet<O, R, I, M>
-where O: StableAddress<Target = R>,
-      R: 'static + StableAddress,
+where O: StableDeref<Target = R>,
+      R: 'static + StableDeref,
       I: Copy + ToPrimitive + FromPrimitive + Bounded,
       M: Map<Key = &'static < R as Deref >::Target, Value = I>
 {

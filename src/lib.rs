@@ -5,7 +5,7 @@
 #![cfg_attr(feature = "unstable", feature(test))]
 
 extern crate num_traits;
-extern crate owning_ref;
+extern crate stable_deref_trait;
 
 #[cfg(test)]
 extern crate rand;

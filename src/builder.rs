@@ -4,7 +4,7 @@ use std::marker::PhantomData;
 use std::ops::Deref;
 
 use num_traits::{Bounded, ToPrimitive, FromPrimitive};
-use owning_ref::StableAddress;
+use stable_deref_trait::StableDeref;
 
 use arena_set::{Error, ArenaSet, StadiumSet};
 
@@ -47,7 +47,7 @@ pub fn builder<O>() -> Builder<O> {
 }
 
 impl<O, I> Builder<O, I>
-where O: StableAddress,
+where O: StableDeref,
       I: Bounded + ToPrimitive + FromPrimitive
 {
     /// Create an empty [`ArenaSet`] that uses a `HashMap`.
@@ -66,8 +66,8 @@ where O: StableAddress,
 }
 
 impl<O, I> Builder<O, I>
-where O: StableAddress,
-      O::Target: 'static + StableAddress,
+where O: StableDeref,
+      O::Target: 'static + StableDeref,
       < O::Target as Deref >::Target: 'static,
       I: Bounded + ToPrimitive + FromPrimitive
 {
