@@ -1,7 +1,7 @@
 [package]
 name = "shawshank"
 description = "An efficient, generic internment structure."
-version = "0.2.2"
+version = "0.2.3"
 authors = ["Samuel Fredrickson <kinghajj@gmail.com>"]
 license = "MIT"
 readme = "README.md"
