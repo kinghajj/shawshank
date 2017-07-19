@@ -8,7 +8,6 @@ readme = "README.md"
 documentation = "https://kinghajj.github.io/shawshank/shawshank/index.html"
 repository = "https://github.com/kinghajj/shawshank"
 keywords = ["string", "intern", "interning"]
-build = "build.rs"
 
 [features]
 unstable = []
@@ -19,7 +18,3 @@ stable_deref_trait = "1.0"
 
 [dev-dependencies]
 rand = "0.3"
-skeptic = "0.10"
-
-[build-dependencies]
-skeptic = "0.10"
