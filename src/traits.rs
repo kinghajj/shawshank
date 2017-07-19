@@ -1,5 +1,5 @@
 use std::collections::{BTreeMap, HashMap};
-use std::hash::Hash;
+use std::hash::{Hash, BuildHasher};
 
 /// The interface for the key-value map internal to an [`ArenaSet`].
 ///
@@ -49,16 +49,16 @@ pub trait Map {
     fn shrink_to_fit(&mut self);
 }
 
-impl<K: Eq + Hash, V> Map for HashMap<K, V> {
+impl<K: Eq + Hash, V, H: Default + BuildHasher> Map for HashMap<K, V, H> {
     type Key = K;
     type Value = V;
 
     fn new() -> Self {
-        HashMap::new()
+        HashMap::default()
     }
 
     fn with_capacity(capacity: usize) -> Self {
-        HashMap::with_capacity(capacity)
+        HashMap::with_capacity_and_hasher(capacity, Default::default())
     }
 
     fn len(&self) -> usize {
